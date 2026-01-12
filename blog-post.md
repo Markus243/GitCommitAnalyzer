@@ -1,4 +1,4 @@
-# Let It Ralph: Building a Git Commit Analyzer with Claude Code's Autonomous Loop Plugin
+# Let It Ralph: Building a Git Commit Analyser with Claude Code's Autonomous Loop Plugin
 
 _How I used the Ralph Wiggum technique to build a complete C# tool overnight_
 
@@ -26,9 +26,9 @@ The plugin intercepts Claude Code's exit attempts, re-feeds your original prompt
 
 That's it. One command, and Claude Code works autonomously until the job is done or the iteration limit is hit.
 
-## The Project: A Git Commit Analyzer
+## The Project: A Git Commit Analyser
 
-I wanted to build something practical — a C# console app that analyzes a repository's commit history and displays beautiful statistics:
+I wanted to build something practical — a C# console app that analyses a repository's commit history and displays beautiful statistics:
 
 - Commit frequency by day and hour
 - Most frequently edited files
@@ -49,15 +49,15 @@ Start with a minimal foundation:
 // Program.cs
 using Spectre.Console;
 
-namespace GitCommitAnalyzer;
+namespace GitCommitAnalyser;
 
 public class Program
 {
     public static int Main(string[] args)
     {
         AnsiConsole.Write(
-            new FigletText("Git Analyzer")
-                .Color(Color.Blue));
+            new FigletText("Git Analyser")
+                .Colour(Colour.Blue));
 
         // TODO: Features will be implemented by Ralph
         return 0;
@@ -70,11 +70,11 @@ public class Program
 This is the heart of the Ralph technique. Your prompt file tells Claude exactly what to build:
 
 ```markdown
-# Git Commit Analyzer - Ralph Loop Prompt
+# Git Commit Analyser - Ralph Loop Prompt
 
 ## Project Goal
 
-Build a C# console application that analyzes Git commit history.
+Build a C# console application that analyses Git commit history.
 
 ## Requirements (Implement in Order)
 
@@ -95,14 +95,15 @@ Build a C# console application that analyzes Git commit history.
    - Most edited files (top 10)
    - Author contributions
 
-4. **Visualization**
+4. **Visualisation**
+
    - ASCII charts with Spectre.Console
-   - Color-coded output
+   - Colour-coded output
 
 ## Completion Signal
 
 When ALL requirements pass, output:
-<promise>ANALYZER_COMPLETE</promise>
+<promise>ANALYSER_COMPLETE</promise>
 
 ## If Stuck
 
@@ -115,12 +116,12 @@ Notice the structure:
 - **Completion signal** — tells Ralph when to stop
 - **Escape hatch** — prevents infinite loops on unsolvable problems
 
-### Step 3: Initialize Git
+### Step 3: Initialise Git
 
 Ralph uses git history to track progress between iterations:
 
 ```bash
-cd git-commit-analyzer
+cd git-commit-analyser
 git init
 git add .
 git commit -m "Initial scaffold for Ralph loop"
@@ -133,9 +134,9 @@ git commit -m "Initial scaffold for Ralph loop"
 claude /plugin install ralph-wiggum@claude-plugins-official
 
 # Start the loop
-/ralph-loop "Build the Git Commit Analyzer according to PROMPT.md" \
+/ralph-loop "Build the Git Commit Analyser according to PROMPT.md" \
   --max-iterations 25 \
-  --completion-promise "ANALYZER_COMPLETE"
+  --completion-promise "ANALYSER_COMPLETE"
 ```
 
 Then... walk away. Make coffee. Go to bed.
@@ -186,49 +187,58 @@ Between iterations, check `git log --oneline` to see what Claude attempted. Fail
 
 Ralph excels at **mechanical tasks** with clear success criteria:
 
-✅ Migrations (Jest → Vitest, .NET Framework → .NET Core)
-✅ Batch refactoring
-✅ Test coverage expansion
-✅ Documentation generation
-✅ Boilerplate-heavy features
+- ✅ Migrations
+- ✅ Batch refactoring
+- ✅ Test coverage expansion
+- ✅ Documentation generation
+- ✅ Boilerplate-heavy features
 
-It struggles with **judgment-heavy work**:
+It struggles with **judgement-heavy work**:
 
-❌ Architecture decisions
-❌ UI/UX design
-❌ Complex business logic without specs
-❌ Anything requiring human feedback mid-process
+- ❌ Architecture decisions
+- ❌ UI/UX design
+- ❌ Complex business logic without specs
+- ❌ Anything requiring human feedback mid-process
 
 ## The Results
 
-After 18 iterations, my Git Commit Analyzer was complete:
+After 7 minutes, my Git Commit Analyser was complete:
 
 - Full CLI with help documentation
 - Parsing for all git log output formats
 - Beautiful Spectre.Console charts
 - Error handling for non-git directories
-- 94% test coverage
 
-Total human time: ~15 minutes of setup. Total wait time: ~2 hours of autonomous execution.
+Larger projects can run for hours without any human intervention; however, please check your token usage.
+
+![Ralph Final Output](https://t2560239.p.clickup-attachments.com/t2560239/01cc4391-1979-4b7a-982e-878421eb65c7/ralph-final.png)
 
 ## Getting Started
 
-Here's the complete project structure to run your own Ralph loop:
+You can view the relevant files in the repository: <https://github.com/Markus243/GitCommitAnalyzer> — please go give it a star!
 
-```
-git-commit-analyzer/
-├── GitCommitAnalyzer.csproj
+```text
+git-commit-analyser/
+├── GitCommitAnalyser.csproj
 ├── Program.cs          # Minimal starting point
 ├── PROMPT.md           # Your Ralph instructions
 ├── README.md
 └── .gitignore
 ```
 
-Clone it, customize the PROMPT.md for your needs, and let Ralph do the work.
+Clone it, customise the PROMPT.md for your needs, and let Ralph do the work.
+
+## Testing
+
+### Boardly
+
+![Boardly](https://t2560239.p.clickup-attachments.com/t2560239/2f2032be-ebf2-4de9-9178-6034d3fa4486/boardly-stats.png)
+
+As you can see, for an iterative, one-shot agentic build, the end result is awesome — it compiles the first time, and all of the requirements were met without error!
 
 ## The Philosophy
 
-Geoffrey Huntley summarizes it perfectly:
+Geoffrey Huntley summarises it perfectly:
 
 > "The technique is deterministically bad in an undeterministic world. It's better to fail predictably than succeed unpredictably."
 
