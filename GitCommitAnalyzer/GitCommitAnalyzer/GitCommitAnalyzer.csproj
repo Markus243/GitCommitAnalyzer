@@ -5,11 +5,53 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>GitCommitAnalyzer</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Markus243</Authors>
+    <Description>A powerful CLI tool that analyzes Git repository commit history and displays beautiful statistics including commit frequency, author contributions, file changes, and streak patterns.</Description>
+    <PackageTags>git;analyzer;commits;statistics;cli;dotnet-tool;devtools</PackageTags>
+    <PackageProjectUrl>https://github.com/Markus243/GitCommitAnalyzer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Markus243/GitCommitAnalyzer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Copyright>Copyright (c) 2026 Markus243</Copyright>
+
+    <!-- .NET Tool Configuration -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>git-analyze</ToolCommandName>
+
+    <!-- Additional Package Settings -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes>Initial release with commit frequency analysis, author contributions, file statistics, and streak tracking.</PackageReleaseNotes>
+
+    <!-- SourceLink for debugging -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- To add a package icon, place an icon.png (128x128 recommended) in the project root
+         and uncomment the following line: -->
+    <!-- <PackageIcon>icon.png</PackageIcon> -->
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
+  </ItemGroup>
+
+  <!-- Include README in the NuGet package -->
+  <ItemGroup>
+    <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Expose internals for testing -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="GitCommitAnalyzer.Tests" />
   </ItemGroup>
 
 </Project>
