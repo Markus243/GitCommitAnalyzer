@@ -98,7 +98,7 @@ public class StatsServiceTests
         Assert.Equal(2, johnStats.CommitCount);
         Assert.Equal(150, johnStats.TotalInsertions);
         Assert.Equal(75, johnStats.TotalDeletions);
-        Assert.Equal(200.0 / 3 * 2, johnStats.CommitPercentage, 1);
+        Assert.Equal(2.0 / 3 * 100, johnStats.CommitPercentage, 1); // 2 out of 3 commits = 66.67%
 
         var janeStats = result.AuthorContributions.First(a => a.Name == "Jane Smith");
         Assert.Equal(1, janeStats.CommitCount);
@@ -132,12 +132,13 @@ public class StatsServiceTests
     public void CalculateStatistics_CommitsByDayOfWeek_CountsCorrectly()
     {
         // Arrange
+        // Jan 12, 2026 = Monday, Jan 13 = Tuesday, Jan 17 = Saturday
         var commits = new List<Commit>
         {
-            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 13), false), // Monday
-            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 13, 14, 0, 0), false), // Monday
-            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 14), false), // Tuesday
-            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 18), false), // Saturday
+            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 12), false), // Monday
+            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 12, 14, 0, 0), false), // Monday
+            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 13), false), // Tuesday
+            CreateCommit("John", "john@example.com", new DateTime(2026, 1, 17), false), // Saturday
         };
 
         // Act
