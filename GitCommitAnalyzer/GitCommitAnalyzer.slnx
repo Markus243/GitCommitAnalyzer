@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="GitCommitAnalyzer/GitCommitAnalyzer.csproj" />
+  <Project Path="GitCommitAnalyzer.Tests/GitCommitAnalyzer.Tests.csproj" />
 </Solution>

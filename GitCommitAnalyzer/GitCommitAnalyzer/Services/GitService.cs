@@ -134,7 +134,9 @@ public partial class GitService
     /// <summary>
     /// Parses a single commit line from the formatted git log output.
     /// </summary>
-    private static Commit? ParseCommitLine(string line)
+    /// <param name="line">A pipe-delimited line: hash|full_hash|author|email|date|parents|message</param>
+    /// <returns>A parsed Commit object, or null if parsing fails.</returns>
+    internal static Commit? ParseCommitLine(string line)
     {
         var parts = line.Split('|');
         if (parts.Length < 7)
@@ -165,7 +167,9 @@ public partial class GitService
     /// <summary>
     /// Parses a numstat line (insertions, deletions, filepath).
     /// </summary>
-    private static FileChange? ParseNumstatLine(string line)
+    /// <param name="line">A tab-separated line: insertions deletions filepath</param>
+    /// <returns>A parsed FileChange object, or null if parsing fails.</returns>
+    internal static FileChange? ParseNumstatLine(string line)
     {
         var match = NumstatRegex().Match(line);
         if (!match.Success)
