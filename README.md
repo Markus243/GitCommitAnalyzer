@@ -138,9 +138,6 @@ cd GitCommitAnalyzer/GitCommitAnalyzer
 dotnet pack --configuration Release
 ```
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
 
